@@ -5,8 +5,18 @@ import (
   "io/ioutil"
   "log"
   "os"
+  "strings"
 )
 
+func isInDelList(fname string) bool {
+  var list1 = []string{"test1", "test2"}
+  for _, e := range list1 {
+    if strings.Contains(e, findstr) {
+      return true
+    }
+  }
+  return false
+}
 func processDir(dirname string) {
   files, err := ioutil.ReadDir(dirname)
   if err != nil {
