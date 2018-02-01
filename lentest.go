@@ -1,6 +1,9 @@
 package main
 import (
   "fmt"
+  "strings"
+  "golang.org/x/text/search"
+  "golang.org/x/text/language"
 )
 
 func main() {
@@ -18,4 +21,12 @@ func main() {
     fmt.Println("Len: ", pos, ": ", t[:pos])
   }
   fmt.Println(t[:3])
+  if strings.Contains(t, "화") {
+    fmt.Println("Yes")
+  }
+  m := search.New(language.Korean, search.IgnoreCase)
+  i, _ := m.IndexString(t, "화")
+  fmt.Println("Index: ", i)
+  fmt.Println(len("화"))
+  fmt.Println(t[:i+6])
 }
