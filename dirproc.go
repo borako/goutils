@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
+	// "io/ioutil"
+	// "log"
 	"os"
 	"strings"
 	"path/filepath"
@@ -18,7 +18,7 @@ var dellist = []string{"CM_B", "comm", "luna", "zzan", "dudd", "jinj", "kyj0",
 		"mool", "plqa", "zizo", "flys", "rkdd", "1223", "pkg5", "cust", "leeh",
 		"wkdv", "f292", "pare", "wwbs", "wooa", "neob", "hanu", "toad", "dldn",
 		"zmwk", "jjya", "star", "saku", "_B", "V1", "L300", "616d", "name", "78_0",
-		"22_0", "B_V6", "0_V3", "B_V4", "0_V9", "B_V3", "0_V2", "_V14"}
+		"22_0", "B_V6", "0_V3", "B_V4", "0_V9", "B_V3", "0_V2", "_V14", "CM_B_"}
 var nodelist = []string{".JPG", ".JPEG", ".PY", ".ZIP"}
 var jpglist = []string{".JPG", ".JPEG"}
 
@@ -39,24 +39,24 @@ func procDir(dirname string) {
 		fmt.Println("Base: ", base, "Ext:", ext)
 		if f.IsDir() == false {
 			if isInList(base, dellist) {
-				fmt.Println("Current (dellist): ", base)
-				fmt.Println("Attempting to delete", path)
+				// fmt.Println("Current (dellist): ", base)
+				fmt.Println("Deleting  (dellist):", path)
 				err := os.Remove(path)
 				if err != nil {
 					fmt.Println(err)
 				}
 			}
 			if isInList(strings.ToUpper(filepath.Ext(f.Name())), nodelist) == false {
-				fmt.Println("Current (nodelist): ", base)
-				fmt.Println("Attempting to delete", path)
+				// fmt.Println("Current (nodelist): ", base)
+				fmt.Println("Deleting  (nodelist): ", path)
 				err := os.Remove(path)
 				if err != nil {
 					fmt.Println(err)
 				}
 			}
 			if ext == "" {
-				fmt.Println("Current (nil ext): ", base)
-				fmt.Println("Attempting to delete", path)
+				// fmt.Println("Current (nil ext): ", base)
+				fmt.Println("Deleting  (nil ext):", path)
 				err := os.Remove(path)
 				if err != nil {
 					fmt.Println(err)
