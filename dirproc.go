@@ -24,19 +24,26 @@ var jpglist = []string{".JPG", ".JPEG"}
 
 func isInList(f string, l []string) bool {
 	for _, e := range l {
-		if strings.Contains(e, f) {
+		if strings.Contains(f, e) {
 			return true
 		}
 	}
 	return false
 }
 
+func removeStrFromFile(s string, f string) {
+	base := filepath.Base(f)
+	if strings.Contains(base, s) {
+		newname := filepath.Dir(f) + "/" + strings.Replace(base, s, "", -1)
+		os.Rename(f, newname)
+	}
+}
 func procDir(dirname string) {
 	fmt.Println("##### DIR: ", dirname , " #########")
 	err := filepath.Walk(dirname, func(path string, f os.FileInfo, err error) error {
 		base := filepath.Base(path)
 		ext := strings.ToUpper(filepath.Ext(f.Name()))
-		fmt.Println("Base: ", base, "Ext:", ext)
+		fmt.Println( "Base: ", base, "Ext:", ext)
 		if f.IsDir() == false {
 			if isInList(base, dellist) {
 				// fmt.Println("Current (dellist): ", base)
@@ -61,6 +68,12 @@ func procDir(dirname string) {
 				if err != nil {
 					fmt.Println(err)
 				}
+			}
+			if strings.Contains(base, "extra") {
+				removeStrFromFile("extra", path)
+			}
+			if strings.Contains(base, "ex") {
+				removeStrFromFile("ex", path)
 			}
 		}
 		return nil
